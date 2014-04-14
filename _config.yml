@@ -99,4 +99,7 @@ stylus:
 # Deployment
 ## Docs: http://zespia.tw/hexo/docs/deployment.html
 deploy:
-  type:
+  type: github
+  repo: https://github.com/vlucas/frisby-site.git
+  branch: gh-pages
+
