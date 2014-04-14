@@ -1,0 +1,9 @@
+{
+  "name": "hexo-site",
+  "version": "2.5.2",
+  "private": true,
+  "dependencies": {
+    "hexo-renderer-jade": "0.0.2",
+    "hexo-renderer-sass": "0.0.3"
+  }
+}
