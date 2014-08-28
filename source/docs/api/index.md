@@ -240,6 +240,18 @@ frisby.create('Very useful for HTML, text, or raw output')
                         |___/|__/
 ```
 
+#### after()
+Callback function to run after test is completed
+```javascript
+this.after(function(err, res, body) {
+  console.log(self.currentRequestFinished.req);
+});
+```
+
+#### afterJSON()
+Callback function to run after test is completed. Helper to also automatically
+convert response body to JSON.
+
 #### Send Raw JSON or POST Body
 By default, Frisby sends POST and PUT requests as
 `application/x-www-form-urlencoded` parameters. If you want to send a raw
