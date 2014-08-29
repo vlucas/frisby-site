@@ -185,6 +185,43 @@ frisby.create('Ensure "bar" really is only 3 characters... because you never kno
 .toss()
 ```
 
+### Helpers
+
+#### after()
+Callback function to run after test is completed. Can be used to run one test
+after another.
+
+```javascript
+frisby.create('First test')
+  .get('http://httpbin.org/get?foo=bar')
+  after(function(err, res, body) {
+
+    frisby.create('Second test, run after first is completed')
+      .get('http://httpbin.org/get?bar=baz')
+    .toss()
+
+  });
+.toss()
+```
+
+#### afterJSON()
+Callback function to run after test is completed. Helper to also automatically
+convert response body to JSON.
+
+```javascript
+frisby.create('First test')
+  .get('http://httpbin.org/get?foo=bar')
+  afterJSON(function(json) {
+
+    // Now you can use 'json' in additional requests
+    frisby.create('Second test, run after first is completed')
+      .get('http://httpbin.org/get?bar=' + json.args.foo)
+    .toss()
+
+  });
+.toss()
+```
+
 ### Inspectors
 
 Inspector helpers are useful for viewing details about the HTTP response when
@@ -239,18 +276,6 @@ frisby.create('Very useful for HTML, text, or raw output')
                          __/ |_/ |
                         |___/|__/
 ```
-
-#### after()
-Callback function to run after test is completed
-```javascript
-this.after(function(err, res, body) {
-  console.log(self.currentRequestFinished.req);
-});
-```
-
-#### afterJSON()
-Callback function to run after test is completed. Helper to also automatically
-convert response body to JSON.
 
 #### Send Raw JSON or POST Body
 By default, Frisby sends POST and PUT requests as
