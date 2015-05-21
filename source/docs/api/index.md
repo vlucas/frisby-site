@@ -222,6 +222,17 @@ frisby.create('First test')
 .toss()
 ```
 
+### Headers
+
+#### addHeader(header, content)
+Add HTTP header by key and value.
+
+#### addHeaders(headers)
+Add group of HTTP headers together. Accept object as headers parameter, each key is used as header key.
+
+#### removeHeader(key)
+Remove HTTP header from outgoing request by key.
+
 ### Inspectors
 
 Inspector helpers are useful for viewing details about the HTTP response when
@@ -277,7 +288,7 @@ frisby.create('Very useful for HTML, text, or raw output')
                         |___/|__/
 ```
 
-#### Send Raw JSON or POST Body
+### Send Raw JSON or POST Body
 By default, Frisby sends POST and PUT requests as
 `application/x-www-form-urlencoded` parameters. If you want to send a raw
 request body or actual JSON, use `{ json: true }` as the third argument (object
@@ -294,4 +305,3 @@ frisby.create('Post JSON string as body')
     .expectHeaderContains('Content-Type', 'json')
 .toss()
 ```
-
