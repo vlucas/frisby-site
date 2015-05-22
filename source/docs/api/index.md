@@ -149,7 +149,7 @@ frisby.create('Ensure Twitter has at least one list that is "NBA"')
   .get('https://api.twitter.com/1/lists/all.json?screen_name=twitter')
     .expectStatus(200)
     .expectHeader('content-type', 'application/json')
-    .expectJSONTypes('?', {
+    .expectJSON('?', {
       name: "NBA",
       full_name: "@twitter/nba-7",
       id_str: "42840851",
