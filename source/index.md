@@ -7,10 +7,10 @@ testing API endpoints easy, fast, and fun. Read below for a quick overview, or
 check out the API documentation.
 
 ### Install Frisby
-Frisby requires both node.js and NPM to be installed on your system, and is installable as an NPM package.
+Frisby requires both node.js and NPM to be installed on your system, and is installable as an NPM package. To install, run in your module
 
 ```
-npm install -g frisby
+npm install --save-dev frisby
 ```
 
 ### Write Tests
