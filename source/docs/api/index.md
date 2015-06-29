@@ -42,6 +42,17 @@ frisby.create('Ensure response has JSON somewhere in the Content-Type header')
 .toss();
 ```
 
+#### expectHeaderToMatch( key, patterm )
+Similar to expectHeaderContains, but use regular expression matching.
+Uses Jasmine's toMatch internally.
+
+```javascript
+frisby.create('Ensure response has image/something in the Content-Type header')
+  .get('http://httpbin.org/get')
+    .expectHeaderContains('Content-Type', '^image/.+')
+.toss();
+```
+
 #### expectJSON( [path], json )
 Tests that response body is JSON and contains the provided JSON keys and values
 in the response.
@@ -185,6 +196,16 @@ frisby.create('Ensure "bar" really is only 3 characters... because you never kno
 .toss()
 ```
 
+#### expectMaxResponseTime( milliseconds )
+Ensure the response is received before a specified delay.
+
+```javascript
+frisby.create('Ensure response is fast enought')
+  .get('http://httpbin.org/get')
+    .expectMaxResponseTime(5)
+.toss()
+```
+
 ### Helpers
 
 #### after()
@@ -219,6 +240,43 @@ frisby.create('First test')
     .toss()
 
   });
+.toss()
+```
+
+#### retry( count, delay )
+Define how many times you want to retry a failling test.
+The delay period between each retry has to be specified in milliseconds.
+
+```javascript
+frisby.create('This fail on purpose, go ahead and retry...')
+  .get('http://httpbina.org/get?foo=bar&bar=baz')
+    .expectStatus(400)
+    .retry(5, 1000)
+.toss()
+```
+
+#### waits( delay )
+Define a delay period ( in milliseconds ) before executing the test.
+
+```javascript
+frisby.create('Wait before I start...')
+  .get('http://httpbina.org/get?foo=bar&bar=baz')
+    .expectStatus(200)
+    .waits(500)
+.toss()
+```
+
+#### exceptionHandler( function )
+Define an expection handler function, this function catch any exception thrown
+by 'expects' helpers. It receive one argument which is the error thrown.
+
+```javascript
+frisby.create('Catch me')
+  .get('http://httpbin.org/get')
+    .expectHeader('I do no exist', 'fail')
+    .exceptionHandler(function(e) {
+      self.abort = true;
+    })
 .toss()
 ```
 
@@ -288,6 +346,64 @@ frisby.create('Very useful for HTML, text, or raw output')
                         |___/|__/
 ```
 
+#### inspectRequest()
+Dumps raw HTTP request sent by Frisby.
+
+```javascript
+frisby.create('Inspect the request object just after it is executed')
+  .post('http://httpbin.org/get?foo=bar&bar=baz', { some: 'test data' })
+    .inspectRequest()
+.toss()
+```
+
+```
+// Console output
+{ json: false,
+  uri: 'http://httpbin.org/get?foo=bar&bar=baz',
+  body: 'some=test%20data',
+  method: 'POST',
+  headers: { 'content-type': 'application/x-www-form-urlencoded' },
+  inspectOnFailure: false,
+  baseUri: '',
+  timeout: 5000 }
+```
+
+#### inspectHeaders()
+Dumps raw HTTP response headers.
+
+```javascript
+frisby.create('Just a quick inspection of the HTTP headers response')
+  .get('http://httpbin.org/get')
+    .inspectHeaders()
+.toss()
+```
+
+```
+// Console output
+{ server: 'nginx',
+  date: 'Mon, 01 Jan 1970 00:00:00 GMT',
+  'content-type': 'application/json',
+  'content-length': '244',
+  connection: 'keep-alive',
+  'access-control-allow-origin': '*',
+  'access-control-allow-credentials': 'true' }
+```
+
+#### inspectStatus()
+Dumps HTTP status code received from server.
+
+```javascript
+frisby.create('Just a quick inspection of the HTTP status code response')
+  .get('http://httpbin.org/get')
+    .inspectStatus()
+.toss()
+```
+
+```
+// Console output (even if little)
+200
+```
+
 ### Send Raw JSON or POST Body
 By default, Frisby sends POST and PUT requests as
 `application/x-www-form-urlencoded` parameters. If you want to send a raw
@@ -296,12 +412,12 @@ literal of options).
 
 ```javascript
 frisby.create('Post JSON string as body')
-    .post('http://httpbin.org/post', {
-        arr: [1, 2, 3, 4],
-        foo: "bar",
-        bar: "baz",
-        answer: 42
-    }, {json: true})
-    .expectHeaderContains('Content-Type', 'json')
+  .post('http://httpbin.org/post', {
+      arr: [1, 2, 3, 4],
+      foo: "bar",
+      bar: "baz",
+      answer: 42
+  }, {json: true})
+  .expectHeaderContains('Content-Type', 'json')
 .toss()
 ```
