@@ -194,13 +194,13 @@ after another.
 ```javascript
 frisby.create('First test')
   .get('http://httpbin.org/get?foo=bar')
-  after(function(err, res, body) {
+  .after(function(err, res, body) {
 
     frisby.create('Second test, run after first is completed')
       .get('http://httpbin.org/get?bar=baz')
     .toss()
 
-  });
+  })
 .toss()
 ```
 
@@ -211,14 +211,14 @@ convert response body to JSON.
 ```javascript
 frisby.create('First test')
   .get('http://httpbin.org/get?foo=bar')
-  afterJSON(function(json) {
+  .afterJSON(function(json) {
 
     // Now you can use 'json' in additional requests
     frisby.create('Second test, run after first is completed')
       .get('http://httpbin.org/get?bar=' + json.args.foo)
     .toss()
 
-  });
+  })
 .toss()
 ```
 
