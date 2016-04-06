@@ -1,0 +1,101 @@
+/**
+ * Site Styles
+ */
+@import 'bootstrap.css';
+
+/* custom font */
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans|Cabin:400,700|Chivo);
+
+/* Override some defaults */
+html, body {
+  font-family: 'Droid Sans', arial, sans-serif;
+  background-color: #eee;
+}
+body {
+  padding-top: 60px; /* 40px to make the container go all the way to the bottom of the topbar */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #000;
+}
+h1, h2 {
+  font-family: 'Cabin', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+}
+h2 {
+  font-size: 26px;
+  margin-bottom: 10px;
+  border-bottom: 4px solid #ddd;
+}
+h3 {
+  border-bottom: 2px solid #ddd;
+}
+h3, h4, h5, h6 {
+  font-family: 'Chivo', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+}
+
+.container {
+  margin-bottom: 50px;
+}
+
+/* The white background content wrapper */
+#page_content {
+  background-color: #fff;
+  padding: 20px;
+  padding-bottom: 40px;
+  margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
+  -webkit-border-radius: 0 0 6px 6px;
+     -moz-border-radius: 0 0 6px 6px;
+          border-radius: 0 0 6px 6px;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+     -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+          box-shadow: 0 1px 2px rgba(0,0,0,.15);
+}
+#page_main p {
+  font-size: 16px;
+  line-height: 1.5em;
+}
+
+/* Page header tweaks */
+#page_head {
+  background-color: #e2550e;
+  border-bottom: 3px solid #E49B26;
+  padding: 20px 20px 10px;
+  margin: -20px -20px 0;
+}
+  #page_head h1 {
+    color: #fff;
+    margin: 0;
+    font-size: 34px;
+  }
+
+#topnav {
+  margin: 0 -6px;
+  border-radius: 0;
+}
+
+#page_main {
+  h1, h2, h3, h4, h5, h6 {
+    color: #000;
+    margin-top: 20px;
+  }
+}
+
+/* page footer */
+#page_foot {
+  background-color: #ddd;
+  border-top: 1px solid #bbb;
+  border-bottom: 1px solid #39414D;
+  padding: 20px 20px 10px;
+  margin: -20px -20px 20px;
+}
+
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+
+@import 'syntax-highlighting';
