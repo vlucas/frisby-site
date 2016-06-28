@@ -421,3 +421,32 @@ frisby.create('Post JSON string as body')
   .expectHeaderContains('Content-Type', 'json')
 .toss()
 ```
+
+### Get GZIP Response Body
+When the API under test returns a GZIP response, use `{ gzip : true }`
+```
+frisby.create('Gzip Sample')
+.get('http://httpbin.org/gzip', {gzip : true})
+.inspectBody()
+.expectHeader('content-encoding', 'gzip')
+.toss();
+```
+Console output `with` { gzip : true }
+```
+{                                                       
+  "gzipped": true,                                      
+  "headers": {                                          
+    "Cache-Control": "max-stale=0",                     
+    "Content-Type": "application/x-www-form-urlencoded",
+    "Host": "httpbin.org"                               
+  },                                                    
+  "method": "GET",                                      
+  "origin": "100.100.100.1"                             
+}                                                       
+```
+
+Console output `without` { gzip : true }
+```
+▼ �♠rW☻�5�M
+�0►��=E���♠⌂►�U◄=@/►۱   ���Ni���&�������¶���mC���↓�◄6,3♥��8$��3�J7♠D��"��y�g1�vp)��ɥ¶�'Q�☻��♫��F�E���4M≱↨ct�l�Ͽyǁ�a���z���)Y⌂kz �y �]���1����Ծ��x�jw��↨k�☺Pd�<�
+```
