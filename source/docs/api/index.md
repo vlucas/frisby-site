@@ -113,7 +113,7 @@ all of the objects in an array, and the other is for testing for at least one
 object in an array.
 
 ##### All Objects in an Array
-To use expectJSON and expectJSONContains test all objects in an array, simply
+To use expectJSON and expectJSONContains to test all objects in an array, simply
 append a path with an asterisk character, so the path looks like
 args.path.myarray.* if the array is at the root level, just use '*' as the
 path.
@@ -200,7 +200,7 @@ frisby.create('Ensure "bar" really is only 3 characters... because you never kno
 Ensure the response is received before a specified delay.
 
 ```javascript
-frisby.create('Ensure response is fast enought')
+frisby.create('Ensure response is fast enough')
   .get('http://httpbin.org/get')
     .expectMaxResponseTime(5)
 .toss()
@@ -244,11 +244,11 @@ frisby.create('First test')
 ```
 
 #### retry( count, delay )
-Define how many times you want to retry a failling test.
+Define how many times you want to retry a failing test.
 The delay period between each retry has to be specified in milliseconds.
 
 ```javascript
-frisby.create('This fail on purpose, go ahead and retry...')
+frisby.create('This fails on purpose, go ahead and retry...')
   .get('http://httpbina.org/get?foo=bar&bar=baz')
     .expectStatus(400)
     .retry(5, 1000)
@@ -267,8 +267,8 @@ frisby.create('Wait before I start...')
 ```
 
 #### exceptionHandler( function )
-Define an expection handler function, this function catch any exception thrown
-by 'expects' helpers. It receive one argument which is the error thrown.
+Define an exception handler function, this function catches any exception thrown
+by 'expects' helpers. It receives one argument which is the error thrown.
 
 ```javascript
 frisby.create('Catch me')
